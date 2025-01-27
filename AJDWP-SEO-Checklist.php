@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Plugin Name:       AJDWP-SEO-Checklist
  * Plugin URI:        https://github.com/arash12javadi/
  * Description:       Simple light weight plugin for SEO Purposes.
- * Version:           250127-0253
+ * Version:           250127
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            Arash Javadi
