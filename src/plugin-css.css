@@ -1,0 +1,162 @@
+/* Container for the floating button on elementor edit page */
+#seo-checklist-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+/* Flying Button */
+#seo-checklist-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  font-size: 14px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#seo-checklist-button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* Popup Container */
+#seo-checklist-popup {
+  display: none;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  width: 320px;
+  max-height: 400px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  overflow-y: auto;
+  z-index: 10000;
+}
+
+/* Title in Popup */
+#seo-checklist-popup h3 {
+  margin: 0 0 10px;
+  font-size: 16px;
+  text-align: center;
+}
+
+/* Checklist Group Titles */
+#seo-checklist-popup h4 {
+  margin: 15px 0 10px;
+  font-size: 14px;
+  color: #333;
+  font-weight: bold;
+}
+
+/* Checklist Items */
+#seo-checklist-popup ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#seo-checklist-popup ul li {
+  margin-bottom: 8px;
+  font-size: 13px;
+  line-height: 1.4;
+  display: block;
+  align-items: center;
+  cursor: pointer;
+}
+
+#seo-checklist-popup ul li input[type="checkbox"] {
+  margin-right: 8px;
+  min-width: 15px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  #seo-checklist-popup {
+    width: 90%;
+    right: 5%;
+    bottom: 60px;
+  }
+
+  #seo-checklist-button {
+    font-size: 12px;
+    padding: 10px 14px;
+  }
+
+  #seo-checklist-popup h3 {
+    font-size: 14px;
+  }
+
+  #seo-checklist-popup ul li {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  #seo-checklist-popup {
+    width: 95%;
+    right: 2.5%;
+    bottom: 50px;
+  }
+
+  #seo-checklist-popup h3 {
+    font-size: 13px;
+  }
+
+  #seo-checklist-popup ul li {
+    font-size: 11px;
+    cursor: pointer;
+  }
+}
+
+/* Hide the span content by default */
+#seo-checklist-popup ul li span {
+  display: none;
+}
+
+/* Show the span content on hover */
+#seo-checklist-popup ul li:hover span {
+  display: block;
+}
+
+/* ------------------------- META BOX STYLES ON POST & PAGE EDIT ------------------------- */
+
+#seo-checklist-meta-box {
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+#seo-checklist-meta-box h4 {
+  margin-top: 0;
+}
+
+#seo-checklist-meta-box ul {
+  list-style: none;
+  padding: 0;
+}
+
+#seo-checklist-meta-box ul li {
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+#seo-checklist-meta-box ul li span {
+  display: none;
+}
+
+#seo-checklist-meta-box ul li:hover span {
+  display: block;
+}
+
+#seo-checklist-meta-box ul li input[type="checkbox"] {
+  margin-right: 5px;
+}
