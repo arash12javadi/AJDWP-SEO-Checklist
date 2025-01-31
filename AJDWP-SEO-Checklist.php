@@ -6,53 +6,88 @@ if ( ! defined( 'ABSPATH' ) ) exit;
  * Plugin Name:       AJDWP-SEO-Checklist
  * Plugin URI:        https://github.com/arash12javadi/
  * Description:       Simple light weight plugin for SEO Purposes.
- * Version:           250127-0253
+ * Version:           250127
  * Requires at least: 5.2
  * Requires PHP:      7.2
  * Author:            Arash Javadi
  * Author URI:        https://arashjavadi.com/  
  */
 
+
+include_once plugin_dir_path(__FILE__) . 'keyword_checklist.php';
+include_once plugin_dir_path(__FILE__) . 'elementor_keyword_checklist.php';
+
 //__________________________________________________________________________//
 //                          ADD JAVASCRIPTS AND CSS
 //__________________________________________________________________________//
 
-// Enqueue JavaScript and CSS on Elemetor page edit
+// Enqueue JavaScript and CSS on Elementor page edit
 add_action('elementor/editor/after_enqueue_scripts', function() {
-    wp_enqueue_style('seo-checklist-styles', plugin_dir_url(__FILE__) . 'src/plugin-css.css');
-    wp_enqueue_script('seo-checklist-scripts', plugin_dir_url(__FILE__) . 'src/plugin-js.js', ['jquery'], '1.0', true);
+    if (!is_admin()) {
+        return; // Ensure it only runs in the admin area
+    }
 
-    // Pass AJAX URL and current post ID to JavaScript
+    // Enqueue CSS
+    wp_enqueue_style(
+        'seo-checklist-styles',
+        plugin_dir_url(__FILE__) . 'assets/SEO-Checklist.css'
+    );
+
+    // Register JavaScript
+    wp_register_script(
+        'seo-checklist-scripts',
+        plugin_dir_url(__FILE__) . 'assets/SEO-Checklist.js',
+        ['jquery'],
+        '1.0',
+        true
+    );
+
+    // Get the current post ID safely
+    $seo_checklist_post_id = get_the_ID() ?: 0;
+
+    // Localize script for Elementor context
     wp_localize_script('seo-checklist-scripts', 'seoChecklistData', [
         'ajax_url' => admin_url('admin-ajax.php'),
-        'post_id' => get_the_ID(),
+        'post_id' => $seo_checklist_post_id,
     ]);
+
+    // Enqueue JavaScript
+    wp_enqueue_script('seo-checklist-scripts');
 });
 
-// Enqueue JavaScript and CSS for the button functionality
+// Enqueue JavaScript and CSS for the post edit screen
 add_action('admin_enqueue_scripts', function ($hook_suffix) {
+    // Only load scripts for post edit screens
     if ($hook_suffix === 'post.php' || $hook_suffix === 'post-new.php') {
-        wp_enqueue_script(
+        // Enqueue CSS
+        wp_enqueue_style(
+            'seo-checklist-edit-style',
+            plugin_dir_url(__FILE__) . 'assets/SEO-Checklist.css'
+        );
+
+        // Register JavaScript
+        wp_register_script(
             'seo-checklist-edit-script',
-            plugin_dir_url(__FILE__) . 'src/plugin-js.js',
+            plugin_dir_url(__FILE__) . 'assets/SEO-Checklist.js',
             ['jquery'],
             '1.0',
             true
         );
 
-        wp_enqueue_style(
-            'seo-checklist-edit-style',
-            plugin_dir_url(__FILE__) . 'src/plugin-css.css'
-        );
+        // Get the current post ID safely
+        $seo_checklist_post_id = get_the_ID() ?: 0;
 
-        // Pass AJAX URL and post ID to the script
-        global $post;
+        // Localize script for post editor pages
         wp_localize_script('seo-checklist-edit-script', 'seoChecklistAdminData', [
             'ajax_url' => admin_url('admin-ajax.php'),
-            'post_id' => $post->ID,
+            'post_id' => $seo_checklist_post_id,
         ]);
+
+        // Enqueue JavaScript
+        wp_enqueue_script('seo-checklist-edit-script');
     }
 });
+
 
 //__________________________________________________________________________//
 //                   AJAX HANDLERS ON ELEMENTOR PAGE EDIT                  
@@ -352,7 +387,7 @@ add_action('wp_ajax_get_seo_checklist', function() {
 add_action('add_meta_boxes', function () {
     add_meta_box(
         'seo_checklist_meta_box',         // Unique ID
-        '🚀 SEO Checklist',                 // Box title
+        '🚀 This Page SEO Checklist',                 // Box title
         'seo_checklist_meta_box_content', // Callback function
         ['post', 'page'],                 // Post types
         'side',                           // Context (side, normal, advanced)
@@ -509,5 +544,30 @@ add_action('wp_ajax_save_seo_checklist_meta', function () {
     // Save the checklist to the database
     update_post_meta($post_id, '_seo_checklist_meta', json_encode($checklist));
 
+    wp_send_json_success(['message' => 'Checklist saved successfully.']);
+});
+
+
+add_action('wp_ajax_save_seo_checklist', function() {
+    if (!isset($_POST['post_id'], $_POST['checklist'])) {
+        wp_send_json_error(['message' => 'Invalid request.']);
+    }
+
+    $post_id = intval($_POST['post_id']);
+    $checklist = json_decode(stripslashes($_POST['checklist']), true);
+
+    update_post_meta($post_id, '_seo_checklist', json_encode($checklist));
+    wp_send_json_success(['message' => 'Checklist saved successfully.']);
+});
+
+add_action('wp_ajax_nopriv_save_seo_checklist', function() {
+    if (!isset($_POST['post_id'], $_POST['checklist'])) {
+        wp_send_json_error(['message' => 'Invalid request.']);
+    }
+
+    $post_id = intval($_POST['post_id']);
+    $checklist = json_decode(stripslashes($_POST['checklist']), true);
+
+    update_post_meta($post_id, '_seo_checklist', json_encode($checklist));
     wp_send_json_success(['message' => 'Checklist saved successfully.']);
 });
