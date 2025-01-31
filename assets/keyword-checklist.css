@@ -1,0 +1,195 @@
+#keyword-checklist-meta-box {
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: auto;
+  white-space: break-spaces;
+  overflow-x: auto;
+}
+#elementor-keyword-checklist-meta-box {
+  padding: 10px;
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  width: auto;
+  white-space: normal;
+  overflow-x: auto;
+}
+
+#keyword-checklist-meta-box table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#keyword-checklist-meta-box th {
+  cursor: pointer;
+}
+
+#keyword-checklist-meta-box th,
+#keyword-checklist-meta-box td {
+  padding: 5px;
+  border: 1px solid #ddd;
+  text-align: left;
+}
+
+#keyword-checklist-meta-box input[type="text"] {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 5px;
+}
+
+#keyword-checklist-meta-box textarea {
+  width: 100%;
+  height: 60px;
+  margin-top: 5px;
+}
+
+/* Green background for "Used" keywords */
+.used-keyword {
+  background-color: #d4edda !important;
+}
+
+/* Cursor effect on toggle button */
+.toggle-used {
+  cursor: pointer;
+  width: 20px;
+  text-align: center;
+}
+
+/* Hover effect on Used Indicator */
+.used-indicator {
+  display: inline-block;
+  cursor: pointer;
+}
+
+#keyword-table td,
+#keyword-table th {
+  float: none !important;
+  /* position: static !important; */
+  order: initial !important;
+}
+
+/* Styles to keyword table  */
+/* Styles to keyword table  */
+/* Styles to keyword table  */
+
+.AJDWP-kw-table-th-tooltip {
+  position: relative !important;
+  /* display: inline-block; */
+  border-bottom: 1px dotted black !important;
+  text-align: center !important;
+  background-color: #000;
+  text-shadow: 0px 0px 10px black;
+  color: #fff;
+  font-size: large;
+  font-weight: bold;
+}
+
+.AJDWP-kw-table-th-tooltip .AJDWP-kw-table-th-tooltiptext {
+  visibility: hidden;
+  width: auto;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px;
+  position: absolute;
+  z-index: 999999999999999999;
+  bottom: 100%;
+  left: 50%;
+  margin-left: -60px;
+  font-size: xx-small;
+}
+
+#keyword-table > thead > tr > th:nth-child(1) > span {
+  margin-left: -20px !important;
+}
+
+.AJDWP-kw-table-th-tooltip:hover .AJDWP-kw-table-th-tooltiptext {
+  visibility: visible;
+}
+
+#keyword-table > thead > tr > th:nth-child(1) {
+  width: 10px;
+  padding: 10px;
+}
+
+td.toggle-used {
+  width: auto;
+  text-align: center !important;
+}
+#keyword-table > tbody > tr > td {
+  text-align: center;
+}
+
+#keyword-table > tbody > tr:nth-child(1) > td.toggle-used,
+#keyword-table > tbody > tr:nth-child(3) > td.toggle-used,
+#keyword-table > tbody > tr:nth-child(4) > td.toggle-used {
+  width: 0;
+}
+
+/* Keyword Checklist styles on elementor page edit side */
+/* Keyword Checklist styles on elementor page edit side */
+/* Keyword Checklist styles on elementor page edit side */
+
+#keyword-checklist-container {
+  position: fixed;
+  bottom: 70px;
+  right: 20px;
+  z-index: 9999;
+}
+
+/* Flying Button */
+#keyword-checklist-button {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 12px 18px;
+  font-size: 14px;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+#keyword-checklist-button:hover {
+  background-color: #45a049;
+  transform: scale(1.05);
+}
+
+/* Popup Container */
+#keyword-checklist-popup {
+  display: none;
+  position: absolute;
+  bottom: 70px;
+  right: 0;
+  width: 500px;
+  max-height: 400px;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  padding: 15px;
+  overflow-y: auto;
+  z-index: 10000;
+}
+
+div#keyword-list-save-del-btns {
+  display: flex;
+}
+
+div#keyword-list-save-del-btns > button {
+  padding: 10px 0px;
+  width: 140px;
+  background-color: #000;
+  color: white;
+  border-radius: 5px;
+  margin: 10px;
+  filter: drop-shadow(0px 1px 2px black);
+  font-weight: bold;
+}
+div#keyword-list-save-del-btns > button:hover {
+  filter: drop-shadow(1px 2px 4px black);
+  scale: 1.05;
+}
